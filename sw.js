@@ -1,4 +1,5 @@
-//service worker for suggest-a-movie app
+//service worker for pwa4
+//TODO: Add the code for all the events and make this work offline
 const version = 1;
 let staticName = `pre-v${version}`;
 let dynamicName = `dynamic-v${version}`;

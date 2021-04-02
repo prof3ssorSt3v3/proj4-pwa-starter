@@ -1,6 +1,7 @@
 const APP = {
   //TODO: update the URL to match your app's url
-  baseURL: 'http://127.0.0.1:5500/api/',
+  // baseURL: 'http://127.0.0.1:5500/api/',
+  baseURL: 'https://prof3ssorst3v3.github.io/proj4-pwa-starter/api/',
   //TODO: update the key for session storage
   OWNERKEY: 'giftr-<MY NAME HERE>-owner',
   owner: null,
