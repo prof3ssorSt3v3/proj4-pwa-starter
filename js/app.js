@@ -97,7 +97,7 @@ const APP = {
               APP.owner = user[0]._id;
               sessionStorage.setItem(APP.OWNERKEY, APP.owner);
               console.log('registered... go to people page');
-              location.href = '/people.html';
+              location.href = '/proj4-pwa-starter/people.html';
             });
         } else {
           console.warn('No email address');
@@ -130,7 +130,7 @@ const APP = {
               APP.owner = user[0]._id;
               sessionStorage.setItem(APP.OWNERKEY, APP.owner);
               console.log('logged in... go to people page');
-              location.href = '/people.html';
+              location.href = `/proj4-pwa-starter/people.html?owner=${APP.owner}`;
             })
             .catch((err) => {
               //TODO: global error handler function
@@ -224,7 +224,7 @@ const APP = {
       //go see the gifts for this person
       let id = btn.closest('.card[data-id]').getAttribute('data-id');
       //we can pass person_id by sessionStorage or queryString or history.state ?
-      let url = `/gifts.html?owner=${APP.owner}&pid=${id}`;
+      let url = `/proj4-pwa-starter/gifts.html?owner=${APP.owner}&pid=${id}`;
       location.href = url;
     }
   },
@@ -305,7 +305,7 @@ const APP = {
               >
             </div>
             <div class="card-action light-green darken-4">
-              <a href="/gifts.html" class="view-gifts white-text"
+              <a href="/proj4-pwa-starter/gifts.html" class="view-gifts white-text"
                 ><i class="material-icons">playlist_add</i> View Gifts</a
               >
             </div>
@@ -321,7 +321,7 @@ const APP = {
       //get the name of the person to display in the title
       let a = document.querySelector('.person-name a');
       a.textContent = APP.PNAME;
-      a.href = `/people.html?owner=${APP.owner}`;
+      a.href = `/proj4-pwa-starter/people.html?owner=${APP.owner}`;
 
       container.innerHTML = APP.GIFTS.map((gift) => {
         //TODO: add handling for null and undefined or missing values
