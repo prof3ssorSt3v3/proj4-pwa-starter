@@ -289,6 +289,7 @@ const APP = {
     let container = document.querySelector('section.row.people>div');
     if (container) {
       //TODO: add handling for null and undefined or missing values
+      //TODO: display message if there are no people
       container.innerHTML = APP.PEOPLE.map((person) => {
         let dt = new Date(parseInt(person.birthDate)).toLocaleDateString(
           'en-CA'
@@ -322,6 +323,7 @@ const APP = {
       let a = document.querySelector('.person-name a');
       a.textContent = APP.PNAME;
       a.href = `/proj4-pwa-starter/people.html?owner=${APP.owner}`;
+      //TODO: display message if there are no gifts
 
       container.innerHTML = APP.GIFTS.map((gift) => {
         //TODO: add handling for null and undefined or missing values
