@@ -12,10 +12,18 @@ const APP = {
   init() {
     console.log('init');
     //register service worker
+    //register service worker
     if ('serviceWorker' in navigator) {
-      //TODO: #1# register the service worker and add event listeners
       //listen for controllerchange events
+      navigator.serviceWorker
+        .register('sw.js', { scope: '/' })
+        .then((reg) => {
+          APP.sw = reg.installing || reg.waiting || reg.active;
+          // console.log('Service Worker Registered', reg);
+        })
+        .catch((err) => console.log('Service worker did not register', err));
       //listen for message events
+      navigator.serviceWorker.addEventListener('message', APP.onMessage);
     }
     //run the pageLoaded function
     APP.pageLoaded();
@@ -151,7 +159,7 @@ const APP = {
       let elemsL = document.querySelectorAll('.sidenav');
       let instancesL = M.Sidenav.init(elemsL, {
         edge: 'left',
-        draggable: true,
+        draggable: true
       });
 
       //add person listener
@@ -179,7 +187,7 @@ const APP = {
       let elemsL = document.querySelectorAll('.sidenav');
       let instancesL = M.Sidenav.init(elemsL, {
         edge: 'left',
-        draggable: true,
+        draggable: true
       });
 
       //add gift listener
@@ -243,7 +251,7 @@ const APP = {
         name,
         birthDate,
         gifts: [],
-        owner: APP.owner,
+        owner: APP.owner
       };
       APP.PEOPLE.push(person); //TODO: #20# save through API not here
       //then update the interface
@@ -266,8 +274,8 @@ const APP = {
         price,
         store: {
           name: storeName,
-          productURL: storeProductURL,
-        },
+          productURL: storeProductURL
+        }
       };
       //add the gift to the current person
       //TODO: #24# Actually send this to the API instead of just updating the array
@@ -421,7 +429,7 @@ const APP = {
         //TODO: #41# global error handler function
         console.warn({ err });
       });
-  },
+  }
 };
 
 document.addEventListener('DOMContentLoaded', APP.init);
