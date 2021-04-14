@@ -1,9 +1,9 @@
 const APP = {
   //TODO: update the URL to match your app's url
+  // This should match your own localhost
   // baseURL: 'http://127.0.0.1:5500/api/',
   baseURL: 'https://prof3ssorst3v3.github.io/proj4-pwa-starter/api/',
-  //TODO: update the key for session storage
-  OWNERKEY: 'giftr-<MY NAME HERE>-owner',
+  OWNERKEY: 'giftr-hasa0072-onib0002-shal0054-owner',
   owner: null,
   GIFTS: [],
   PEOPLE: [],
@@ -13,7 +13,7 @@ const APP = {
     console.log('init');
     //register service worker
     if ('serviceWorker' in navigator) {
-      //TODO: register the service worker and add event listeners
+      //TODO: #1# register the service worker and add event listeners
       //listen for controllerchange events
       //listen for message events
     }
@@ -34,8 +34,8 @@ const APP = {
       case 'home':
         //do things for the home page
         //check for the ?out and clear out the user's session info
-        //TODO: this check for logged in should be done through API and token
-        //TODO: clear out old tokens when the user logs out
+        //TODO: #2# this check for logged in should be done through API and token
+        //TODO: #3# clear out old tokens when the user logs out
         if (params.has('out')) {
           APP.owner = null;
           APP.GIFTS = [];
@@ -62,7 +62,7 @@ const APP = {
       return APP;
     } else {
       //send the user back to the home page and log them out
-      //TODO: add the check via the API for a user being logged in and logging out
+      //TODO: #4# add the check via the API for a user being logged in and logging out
       location.href = '/index.html?out';
     }
   },
@@ -74,10 +74,10 @@ const APP = {
       let btnReg = document.getElementById('btnRegister');
       btnReg.addEventListener('click', (ev) => {
         //go to people page after reg & login success
-        //TODO: api call
+        //TODO: #5# api call
         let email = document.getElementById('email').value;
         email = email.trim();
-        //TODO: send email and password AND username to API call
+        //TODO: #6# send email and password AND username to API call
         if (email) {
           let url = APP.baseURL + 'users.json';
           fetch(url)
@@ -92,7 +92,7 @@ const APP = {
               }
             )
             .then((data) => {
-              //TODO: do the user validation in the API
+              //TODO: #7# do the user validation in the API
               let user = data.users.filter((user) => user.email === email);
               APP.owner = user[0]._id;
               sessionStorage.setItem(APP.OWNERKEY, APP.owner);
@@ -107,10 +107,10 @@ const APP = {
       let btnLogin = document.getElementById('btnLogin');
       btnLogin.addEventListener('click', (ev) => {
         //go to people page after login success
-        //TODO: api call
+        //TODO: #8# api call
         let email = document.getElementById('email').value;
         email = email.trim();
-        //TODO: send email and password AND username to API call
+        //TODO: #9# send email and password AND username to API call
         if (email) {
           let url = APP.baseURL + 'users.json';
           fetch(url)
@@ -125,7 +125,7 @@ const APP = {
               }
             )
             .then((data) => {
-              //TODO: do the user validation in the API
+              //TODO: #10# do the user validation in the API
               let user = data.users.filter((user) => user.email === email);
               APP.owner = user[0]._id;
               sessionStorage.setItem(APP.OWNERKEY, APP.owner);
@@ -133,7 +133,7 @@ const APP = {
               location.href = `/proj4-pwa-starter/people.html?owner=${APP.owner}`;
             })
             .catch((err) => {
-              //TODO: global error handler function
+              //TODO: #11# global error handler function
               console.warn({ err });
             });
         } else {
@@ -157,8 +157,8 @@ const APP = {
       //add person listener
       let btnSave = document.getElementById('btnSavePerson');
       btnSave.addEventListener('click', APP.addPerson);
-      //TODO:
-      //delete person listener TODO: Add a confirmation for delete
+      //TODO: #12#
+      //delete person listener TODO: #13# Add a confirmation for delete
       //plus same listener for view gifts listener
       let section = document.querySelector(`section.people`);
       section.addEventListener('click', APP.delOrViewPerson);
@@ -185,8 +185,8 @@ const APP = {
       //add gift listener
       let btnSave = document.getElementById('btnSaveGift');
       btnSave.addEventListener('click', APP.addGift);
-      //TODO:
-      //delete gift listener TODO: Add confirmation for delete
+      //TODO: #14#
+      //delete gift listener TODO: #15# Add confirmation for delete
       let section = document.querySelector(`section.gifts`);
       section.addEventListener('click', APP.delGift);
       //stop form submissions
@@ -203,7 +203,7 @@ const APP = {
     let btn = ev.target;
     if (btn.classList.contains('del-gift')) {
       let id = btn.closest('.card[data-id]').getAttribute('data-id');
-      //TODO: remove from DB by calling API
+      //TODO: #16# remove from DB by calling API
       APP.GIFTS = APP.GIFTS.filter((gift) => gift._id != id);
       APP.buildGiftList();
     }
@@ -215,7 +215,7 @@ const APP = {
     if (btn.classList.contains('del-person')) {
       //delete a person
       let id = btn.closest('.card[data-id]').getAttribute('data-id');
-      //TODO: remove from DB by calling API
+      //TODO: #17# remove from DB by calling API
       APP.PEOPLE = APP.PEOPLE.filter((person) => person._id != id);
       APP.buildPeopleList();
     }
@@ -236,8 +236,8 @@ const APP = {
     let birthDate = new Date(dob).valueOf();
     if (name.trim() && birthDate) {
       console.log(name, dob);
-      //TODO: actually send this to the API for saving
-      //TODO: let the API create the _id
+      //TODO: #18# actually send this to the API for saving
+      //TODO: #19# let the API create the _id
       let person = {
         _id: Date.now(),
         name,
@@ -245,7 +245,7 @@ const APP = {
         gifts: [],
         owner: APP.owner,
       };
-      APP.PEOPLE.push(person); //TODO: save through API not here
+      APP.PEOPLE.push(person); //TODO: #20# save through API not here
       //then update the interface
       APP.buildPeopleList();
     }
@@ -256,9 +256,9 @@ const APP = {
     let price = document.getElementById('price').value;
     let storeName = document.getElementById('storeName').value;
     let storeProductURL = document.getElementById('storeProductURL').value;
-    //TODO: make all 4 fields required
-    //TODO: check for valid URL if provided
-    //TODO: provide error messages to user about invalid prices and urls
+    //TODO: #21# make all 4 fields required
+    //TODO: #22# check for valid URL if provided
+    //TODO: #23# provide error messages to user about invalid prices and urls
     if (name.trim() && !isNaN(price) && storeName.trim()) {
       let gift = {
         _id: Date.now(),
@@ -270,26 +270,26 @@ const APP = {
         },
       };
       //add the gift to the current person
-      //TODO: Actually send this to the API instead of just updating the array
+      //TODO: #24# Actually send this to the API instead of just updating the array
       APP.GIFTS.push(gift);
       APP.buildGiftList();
       document.querySelector('.modal form').reset();
     }
   },
   sendMessage(msg, target) {
-    //TODO:
+    //TODO: #25#
     //send a message to the service worker
   },
   onMessage({ data }) {
-    //TODO:
+    //TODO: #26#
     //message received from service worker
   },
   buildPeopleList: () => {
     //build the list of cards inside the current page's container
     let container = document.querySelector('section.row.people>div');
     if (container) {
-      //TODO: add handling for null and undefined or missing values
-      //TODO: display message if there are no people
+      //TODO: #27# add handling for null and undefined or missing values
+      //TODO: #28# display message if there are no people
       container.innerHTML = APP.PEOPLE.map((person) => {
         let dt = new Date(parseInt(person.birthDate)).toLocaleDateString(
           'en-CA'
@@ -313,7 +313,7 @@ const APP = {
           </div>`;
       }).join('\n');
     } else {
-      //TODO: error message
+      //TODO: #29# error message
     }
   },
   buildGiftList: () => {
@@ -323,11 +323,11 @@ const APP = {
       let a = document.querySelector('.person-name a');
       a.textContent = APP.PNAME;
       a.href = `/proj4-pwa-starter/people.html?owner=${APP.owner}`;
-      //TODO: display message if there are no gifts
+      //TODO: #30# display message if there are no gifts
 
       container.innerHTML = APP.GIFTS.map((gift) => {
-        //TODO: add handling for null and undefined or missing values
-        //TODO: check for a valid URL before setting an href
+        //TODO: #31# add handling for null and undefined or missing values
+        //TODO: #32# check for a valid URL before setting an href
         let url = gift.store.productURL;
         try {
           url = new URL(url);
@@ -364,11 +364,11 @@ const APP = {
           </div>`;
       }).join('\n');
     } else {
-      //TODO: error message
+      //TODO: #33# error message
     }
   },
   getPeople() {
-    //TODO:
+    //TODO: #34#
     //get the list of all people for the user_id
     if (!APP.owner) return;
     let url = `${APP.baseURL}people.json?owner=${APP.owner}`;
@@ -383,20 +383,20 @@ const APP = {
         }
       )
       .then((data) => {
-        //TODO: filter this on the serverside NOT here
+        //TODO: #35# filter this on the serverside NOT here
         APP.PEOPLE = data.people.filter((person) => person.owner == APP.owner);
         APP.buildPeopleList();
       })
       .catch((err) => {
-        //TODO: global error handler function
+        //TODO: #36# global error handler function
         console.warn({ err });
       });
   },
   getGifts() {
-    //TODO:
+    //TODO: #37#
     //get the list of all the gifts for the person_id and user_id
     if (!APP.owner) return;
-    //TODO: use a valid URL and queryString for your API
+    //TODO: #38# use a valid URL and queryString for your API
     let url = `${APP.baseURL}people.json?owner=${APP.owner}&pid=${APP.PID}`;
     fetch(url)
       .then(
@@ -409,16 +409,16 @@ const APP = {
         }
       )
       .then((data) => {
-        //TODO: filter this on the serverside NOT here
+        //TODO: #39# filter this on the serverside NOT here
         let peeps = data.people.filter((person) => person.owner == APP.owner);
-        //TODO: match the person id with the one from the querystring
+        //TODO: #40# match the person id with the one from the querystring
         let person = peeps.filter((person) => person._id == APP.PID);
         APP.PNAME = person[0].name;
         APP.GIFTS = person[0].gifts; //person is an array from filter()
         APP.buildGiftList();
       })
       .catch((err) => {
-        //TODO: global error handler function
+        //TODO: #41# global error handler function
         console.warn({ err });
       });
   },

@@ -13,22 +13,28 @@ let staticList = [
   'https://fonts.googleapis.com/icon?family=Material+Icons',
   'https://fonts.gstatic.com/s/materialicons/v78/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2',
 ];
-let dynamicList = [];
+let dynamicList = [
+  //TODO: #42#
+];
 
 self.addEventListener('install', (ev) => {
   //install event - browser has installed this version
+  //TODO: #43#
 });
 
 self.addEventListener('activate', (ev) => {
   //activate event - browser now using this version
+  //TODO: #44#
 });
 
 self.addEventListener('fetch', (ev) => {
   //fetch event - web page is asking for an asset
+  //TODO: #45#
 });
 
 self.addEventListener('message', ({ data }) => {
   //message received from a web page that uses this sw
+  //TODO: #46#
 });
 
 const sendMessage = async (msg) => {
