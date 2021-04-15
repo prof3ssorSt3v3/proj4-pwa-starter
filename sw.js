@@ -12,6 +12,7 @@ let staticList = [
   '/css/materialize.min.css',
   'https://fonts.googleapis.com/icon?family=Material+Icons',
   'https://fonts.gstatic.com/s/materialicons/v78/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2',
+  // TODO: #47#
 ];
 let dynamicList = [
   //TODO: #42#
